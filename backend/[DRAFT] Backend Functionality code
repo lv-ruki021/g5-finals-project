@@ -1,1 +1,116 @@
-// Dito ilalagay ang draft ng code
+'''
+Automated Matrix Diagonalizer:
+Build a program/application that accepts an n-by-n matrix A, where n ≤ 5, and checks if the given matrix is diagonalizable or not. 
+If the matrix A is diagonalizable, the program generates a nonsingular
+matrix P and a diagonal matrix D such that P^-1 * A * P = D.
+
+Mathematical Accuracy - Correctly implements mathematical concepts and produces accurate results.  
+Code Implementation - Modular and optimized.
+User Interface - UI is easy to use.
+'''
+
+import numpy as np
+
+def define_user_matrix():
+    print("\n=== Enter Your Own Matrix ===")
+    
+    # 1. Get dimension n from user input. N must be less than or equal to 5.
+    while True:
+        try:
+            n_input = input("Enter dimension n (e.g., 3 for a 3x3 matrix): ")
+            n = int(n_input)
+            if n <= 0:
+                print("Error: Dimension must be a positive integer. Please enter a new value...")
+                continue
+            if n > 5:
+                print("Error: Dimension must be less than or equal to 5. Please enter a new value...")
+                continue
+            break
+        except ValueError:
+            print("Invalid input. Please enter an integer.")
+            
+    # 2. Get matrix rows from user input. 
+    matrix = []
+    print(f"Enter the {n} rows. Separate numbers with spaces (e.g., '1 -2 -1').")
+    
+    for i in range(n):
+        while True:
+            try:
+                row_str = input(f"Row {i+1}: ")
+                row_values = [float(x) for x in row_str.split()]
+                
+                if len(row_values) != n:
+                    print(f"Error: You entered {len(row_values)} numbers, but expected {n}. Try again.")
+                    continue
+                matrix.append(row_values)
+                break
+            except ValueError:
+                print("Error: Invalid input. Please use separated numbers.")
+    # Daigo: Placeholder. Should be changed depending on the input method of the UI.
+    return matrix
+
+def automated_matrix_diagonalizer(A):
+    A = np.array(A, dtype=float)
+    n = A.shape[0]
+
+    print(f"\n--- Analyzing {n}x{n} Matrix ---")
+    print("This is your matrix:\n")
+    print(A)
+    print("-" * 30)
+
+    # 1. Compute for Eigenvalues and Eigenvectors.
+    try:
+        eigenvalues, eigenvectors = np.linalg.eig(A)
+        # Cleans imaginary values from numpy calculations if they are negligible.
+        if np.allclose(eigenvalues.imag, 0):
+            eigenvalues = eigenvalues.real
+            eigenvectors = eigenvectors.real
+    except np.linalg.LinAlgError:
+        print("Error: LinAlgError. Matrix computation failed.")
+        return None, None
+
+    # 2. Matrix P.
+    P = eigenvectors
+
+    # 3. Check diagonalizability.
+    rank_P = np.linalg.matrix_rank(P) # Checks if P is full rank.
+
+    if rank_P < n:
+        print(f"Result: Matrix is NOT diagonalizable")
+        print(f"Reason: Rank of P is {rank_P} < {n}.")
+        return None, None
+    else:
+        print(f"Result: Matrix IS diagonalizable")
+        
+        # 4. Matrix D.
+        D = np.diag(eigenvalues)
+
+        # 5. Display P and D, rounded for cleaner output.
+        D_display = np.round(D, decimals=4)
+        P_display = np.round(P, decimals=4)
+        
+        print("\nMatrix D (Diagonal Matrix of Eigenvalues):")
+        print(D_display)
+        
+        print("\nMatrix P (Matrix of Eigenvectors):")
+        print(P_display)
+
+        # 6. Verification
+        P_inv = np.linalg.inv(P)
+        check = P_inv @ A @ P
+        if np.allclose(check, D):
+            print("\nDiagonalization successful: P^-1 * A * P = D")
+        
+        return P, D
+    # Daigo: Results are orthonormalized due to numpy things na di ko alam (standard ata ng engineering degrees).
+
+# Main program loop
+if __name__ == "__main__":
+    while True:
+        user_matrix = define_user_matrix()
+        automated_matrix_diagonalizer(user_matrix)
+        
+        again = input("\nDo you want to test another matrix? (y/n): ").lower()
+        if again != 'y':
+            print("Exiting program.")
+            break
