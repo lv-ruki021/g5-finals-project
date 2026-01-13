@@ -7,6 +7,101 @@
     box-sizing: border-box;
 }
 
+/* ===== ANIMATION KEYFRAMES ===== */
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide left animation */
+@keyframes slideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide right animation */
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale animation */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: 16px;
@@ -34,6 +129,7 @@ main {
   background-color: #ffbd59;
   overflow: hidden;
   border: 2px solid black;
+  animation: slideDown 0.5s ease-out;
 }
 
 /* decoration for top navigation bar */
@@ -45,12 +141,14 @@ main {
   padding: 14px 16px;
   border-left: 1px solid black;
   border-right: 1px solid black;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
   background-color: #ffde59;
   color: black;
+  transform: scale(1.05);
 }
 
 /* Color for active link */
@@ -70,7 +168,8 @@ div.title-card {
     text-align: center;
     margin: 0 auto;
     position: relative;
-    top: 10rem;
+    top: 1.5rem;
+    animation: scaleIn 0.6s ease-out;
 }
 
 /* subtitle styles */
@@ -92,12 +191,70 @@ button.get-started-button{
     font-size: 1.1rem;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 /* get started button hover effect */
 button.get-started-button:hover {
     background-color: #ffd633;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Cards container styles */
+.cards-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+    justify-content: center;
+}
+
+/* Individual info card styles */
+.info-card {
+    flex: 1;
+    max-width: 500px;
+    background: #ffde59;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid #ffbd59;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideUp 0.6s ease-out both;
+}
+
+/* Stagger animation for info cards */
+.info-card:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.info-card:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+/* Info card hover effect */
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Info card heading styles */
+.info-card h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    text-align: center;
+    animation: slideDown 0.4s ease-out;
+}
+
+/* Info card paragraph styles */
+.info-card p {
+    color: #555;
+    line-height: 1.8;
+    font-size: 0.95rem;
+    text-align: justify;
+    animation: fadeIn 0.5s ease-out 0.2s both;
 }
 
 /*default button styles*/
@@ -109,11 +266,13 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 /* default button hover effect */
 button:hover {
     background-color: #dea44c;
+    transform: translateY(-2px);
 }
 
 
@@ -127,6 +286,7 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
     top: 2rem;
+    animation: slideUp 0.6s ease-out;
 }
 
 /* For Diagonalize Tab */
@@ -135,6 +295,7 @@ button:hover {
     text-align: center;
     margin-bottom: 30px;
     color: black;
+    animation: slideDown 0.5s ease-out 0.2s both;
 }
 
 /* content wrapper styles */
@@ -151,6 +312,7 @@ button:hover {
     background: #ffde59;
     border-radius: 6px;
     border: 1px solid #e0e0e0;
+    animation: slideLeft 0.6s ease-out 0.3s both;
 }
 
 .input-section h3 {
@@ -173,6 +335,7 @@ button:hover {
     border-radius: 6px;
     border: 1px solid #e0e0e0;
     overflow-y: auto;
+    animation: slideRight 0.6s ease-out 0.3s both;
 }
 
 .output-section h3 {
@@ -193,6 +356,14 @@ textarea {
     border-radius: 4px;
     font-size: 0.95rem;
     resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* textarea focus animation */
+textarea:focus {
+    outline: none;
+    border-color: #ffbd59;
+    box-shadow: 0 0 8px rgba(255, 189, 89, 0.5);
 }
 
 /* result box styles */
@@ -206,6 +377,7 @@ textarea {
     font-size: 0.9rem;
     min-height: 50px;
     overflow-y: auto;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .result-box pre {
@@ -225,9 +397,24 @@ textarea {
 li.team{
     list-style-type: none;
     margin-bottom: 4px;
+    animation: slideRight 0.5s ease-out both;
 }
+
+/* Stagger animation for team members */
+li.team:nth-child(1) { animation-delay: 0.1s; }
+li.team:nth-child(2) { animation-delay: 0.2s; }
+li.team:nth-child(3) { animation-delay: 0.3s; }
+li.team:nth-child(4) { animation-delay: 0.4s; }
+li.team:nth-child(5) { animation-delay: 0.5s; }
 
 /* anchor tag styles for team members */
 li.team a{
     color: black;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Team member link hover effect */
+li.team a:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
 }
