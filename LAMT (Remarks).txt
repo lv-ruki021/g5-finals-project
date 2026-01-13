@@ -1,0 +1,15 @@
+Backend
+⦁	App.py functionality is missing (Flask)
+⦁	Diagonalizer Logic should just be pure computation. No inputs, need nya i-return 'yung output to HTML. (That's Frontend Stuff)
+⦁	Logic is Correct (From my understanding)
+⦁	(Suggestion) Use the SymPy library instead of NumPy for better formatting No more decimals.
+
+
+Frontend
+(IDK if kasama me here, sinama ko na hehe -JM)
+⦁	About Us 😎
+⦁	(Suggestion) We can omit "Home" and have "Diagonalize" be the landing page instead.
+⦁	(Suggestion) Should the concept/definition of "Diagonalization" be included here as well? 
+⦁	(Suggestion) A dynamic table instead of inputted one. 
+    The inputted values in the table must be turned into a matrix to be sent to the backend. 
+
