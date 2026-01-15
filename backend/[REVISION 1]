@@ -1,2 +1,54 @@
 // dito ang unang revised version ng Backend Functionality Code
 
+// pure logic, also pinalitan numpy to sympy lib based sa remarks kasi mas maganda formatting, need nalang sa ui mag install ng sympy
+// walang app.py for flask since pyscript gamit sa frontend (tama ba???)
+
+import sympy as sp
+from js import document, window
+
+def diagonalize_clicked():
+    try:
+        # Get input
+        matrix_text = document.getElementById("matrixInput").value
+        output_div = document.getElementById("output")
+        
+        lines = [line.strip().split() for line in matrix_text.strip().split('\n') if line.strip()]
+        
+        # Check for square matrix
+        if not lines or len(lines) != len(lines[0]):
+            output_div.innerHTML = "<p style='color: red;'>Error: Matrix must be square.</p>"
+            return
+
+        M = sp.Matrix(lines)
+
+        # Perform diagonalization
+        if not M.is_diagonalizable():
+            output_div.innerHTML = f"<p><strong>Result:</strong> Not Diagonalizable.<br>Reason: Defective matrix.</p>"
+            return
+        
+        P, D = M.diagonalize()
+
+        p_latex = sp.latex(P)
+        d_latex = sp.latex(D)
+        eigen_values = [sp.latex(v) for v in M.eigenvals()]
+
+        html_output = f"""
+            <p><strong>Result: Matrix IS diagonalizable ✓</strong></p>
+            <p><strong>Matrix P (Eigenvectors):</strong></p>
+            <p>$${p_latex}$$</p>
+            <p><strong>Matrix D (Diagonal):</strong></p>
+            <p>$${d_latex}$$</p>
+            <p><strong>Eigenvalues:</strong> {', '.join(eigen_values)}</p>
+        """
+        
+        output_div.innerHTML = html_output
+
+        # Mathjax typesetting
+        if window.MathJax:
+            window.MathJax.typeset()
+
+    except Exception as e:
+        document.getElementById("output").innerHTML = f"<p style='color: red;'>Error: {str(e)}</p>"
+
+# Expose function to JS
+window.diagonalize_clicked = diagonalize_clicked
