@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Diagonalize - Automatic Matrix Diagonalizer</title>
+    </head>
+    <body>
+    <div class="topnav">
+        <a>AUTODIAG</a>
+        <a href="home.html">Home</a>
+        <a class="active" href="diagonalize.html">Diagonalize</a>
+        <a href="aboutus.html">About us</a>
+    </div>
+
+    <div class="container">
+        <h2>Matrix Diagonalization</h2>
+        
+        <div class="content-wrapper">
+            <!-- Left Side: Input -->
+            <div class="input-section">
+                <h3>Input Matrix</h3>
+                <div class="matrix-controls">
+                    <label for="matrixSize">Select Matrix Size:</label>
+                    <select id="matrixSize">
+                        <!-- Matrix Size range from 1 - 5 only -->
+                        <option value="1" selected>1x1</option>
+                        <option value="2">2x2</option>
+                        <option value="3">3x3</option>
+                        <option value="4">4x4</option>
+                        <option value="5">5x5</option>
+                    </select>
+                </div>
+                <div id="matrixTableContainer">
+                    <table id="matrixTable" class="matrix-table">
+                        <tbody>
+                            <tr>
+                                <td><input type="number" value="1" step="any"></td>
+                                <td><input type="number" value="2" step="any"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="number" value="2" step="any"></td>
+                                <td><input type="number" value="1" step="any"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="diagonalizeDiv">
+                    <button id="diagonalizeBtn" onclick="tableToMatrix()">Diagonalize</button>
+                </div>
+            </div>
+            
+            <!-- Right Side: Output -->
+            <div class="output-section">
+                <h3>Results</h3>
+                <div id="output" class="result-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Removed Pyscript - This implementation completely removes backend's functionality. 
+     Now if that's the case, we can proceed. It just mean that Khalil's work is rendered useless--> 
+    <script src="scripts/app.js"></script>
+
+    </body>
+</html>

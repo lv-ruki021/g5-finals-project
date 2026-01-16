@@ -1,0 +1,90 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sympy as sp
+
+# Changes:
+# Added App.py
+# Added Flask Functionality to connect Front and Backend
+# Combines Backend and Frontend (Pyscript) Pyton code
+
+app = Flask(__name__)
+CORS(app)  # allow frontend JS fetch
+
+@app.route("/matrix", methods=["POST"]) # What Flask URL Javascript sends to and the method.
+def diagonalize_clicked():
+    print("\n=== DEBUG: /matrix HIT ===")
+    try:
+        # Get input
+        data = request.get_json() # Initializing the method above, allows for easier request
+        print("DEBUG: Raw JSON received:", data)
+
+        matrix_data = data.get("matrix") # Converts JSON matrix in Matrix Array
+        
+        # Check if there's a Matrix
+        if not matrix_data:
+            print("DEBUG: No matrix data received")
+            return jsonify({
+                "status": "error",
+                "message": "No matrix data received."
+            }), 400
+
+        print("DEBUG: Matrix size:", len(matrix_data), "x", len(matrix_data[0]))
+        M = sp.Matrix(matrix_data) # Converts to Sympy Matrix
+        a_latex = sp.latex(M)
+        print("DEBUG: Matrix converted to SymPy Matrix")
+
+        # Ensure all elements are numeric
+        if not all(elem.is_real or elem.is_complex for elem in M):
+            print("DEBUG ERROR: Non-numeric element detected")
+            return jsonify({
+                "status": "error",
+                "message": "All matrix elements must be numeric."
+            }), 400
+
+        # Check Matrix diagonalizability
+        if not M.is_diagonalizable():
+            print("DEBUG: Matrix NOT diagonalizable")
+            return jsonify({
+                "status": "failure",
+                "A": a_latex,
+                "message": "Matrix is NOT diagonalizable (defective matrix)."
+            })
+
+        # Diagonalize
+        P, D = M.diagonalize()
+        P = P.applyfunc(lambda x: sp.nsimplify(x, rational=True))
+        D = D.applyfunc(lambda x: sp.nsimplify(x, rational=True))
+        p_latex = sp.latex(P)
+        d_latex = sp.latex(D)
+        pinv_latex = sp.latex(P.inv())
+        verification = P.inv() * M * P
+
+        print("DEBUG: Diagonalization complete")
+        print("DEBUG: P =", P)
+        print("DEBUG: D =", D)
+        print("DEBUG: Verification P^-1 A P =", verification)
+
+        # Returns it back as JSON files
+        return jsonify({
+            "status": "success",
+            "A": a_latex,
+            "P": p_latex,
+            "D": d_latex,
+            "P_inv": pinv_latex,
+            "verification": sp.latex(verification),
+            "message": "Matrix is Diagonalizable"
+        })
+        
+    # Catch error
+    except Exception as e:
+        print("DEBUG ERROR: Exception occurred:", e)
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
+    
+
+
+# Only used for current setup
+if __name__ == "__main__":
+    app.run(debug=True)
