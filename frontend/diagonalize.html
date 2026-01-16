@@ -4,6 +4,8 @@
         <link rel="stylesheet" href="style/style.css">
         <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
         <script defer type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Diagonalize - Automatic Matrix Diagonalizer</title>
@@ -23,9 +25,34 @@
             <!-- Left Side: Input -->
             <div class="input-section">
                 <h3>Input Matrix</h3>
-                <p>Enter matrix rows separated by newlines, numbers by spaces.</p>
-                <p><em>Example:</em><br>1 2<br>2 1</p>
-                <textarea id="matrixInput" placeholder="1 2 3&#10;4 5 6"></textarea>
+                <div class="matrix-controls">
+                    <label for="matrixSize">Select Matrix Size:</label>
+                    <select id="matrixSize">
+                        <option value="2">2x2</option>
+                        <option value="3">3x3</option>
+                        <option value="4">4x4</option>
+                        <option value="5">5x5</option>
+                        <option value="6">6x6</option>
+                        <option value="7">7x7</option>
+                        <option value="8">8x8</option>
+                        <option value="9">9x9</option>
+                        <option value="10">10x10</option>
+                    </select>
+                </div>
+                <div id="matrixTableContainer">
+                    <table id="matrixTable" class="matrix-table">
+                        <tbody>
+                            <tr>
+                                <td><input type="number" value="1" step="any"></td>
+                                <td><input type="number" value="2" step="any"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="number" value="2" step="any"></td>
+                                <td><input type="number" value="1" step="any"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <button id="diagonalizebtn">Diagonalize</button>
             </div>
             
@@ -38,140 +65,131 @@
     </div>
 
     <py-config>
-        packages = ["numpy"]
+        packages = ["sympy"]
     </py-config>
-    
+
     <script type="py">
-import numpy as np
+import sympy as sp
 from js import document, window
 
-print("PyScript: Initializing diagonalization functions...")
-
-def parse_matrix_input(matrix_text):
-    """Parse matrix input from textarea and return as numpy array."""
-    lines = matrix_text.strip().split('\n')
-    matrix = []
+def get_matrix_from_table():
+    """Extract matrix values from the HTML table and convert to rational numbers"""
+    table = document.getElementById("matrixTable")
+    rows = table.getElementsByTagName("tr")
+    matrix_data = []
     
-    for line in lines:
-        if line.strip():
+    for row in rows:
+        row_data = []
+        inputs = row.getElementsByTagName("input")
+        for input_elem in inputs:
             try:
-                row = [float(x) for x in line.strip().split()]
-                if matrix and len(row) != len(matrix[0]):
-                    return None, "Error: All rows must have the same number of columns."
-                matrix.append(row)
-            except ValueError:
-                return None, "Error: Invalid input. Please use numbers separated by spaces."
+                val = input_elem.value.strip()
+                # Try to parse as fraction first (e.g., "1/2")
+                if '/' in val:
+                    parts = val.split('/')
+                    rational_val = sp.Rational(int(parts[0]), int(parts[1]))
+                else:
+                    # Convert decimal to rational
+                    rational_val = sp.nsimplify(float(val), rational=True)
+                row_data.append(rational_val)
+            except (ValueError, ZeroDivisionError) as e:
+                raise ValueError(f"Invalid matrix value: {input_elem.value}")
+        if row_data:
+            matrix_data.append(row_data)
     
-    if not matrix:
-        return None, "Error: Please enter a matrix."
-    
-    n = len(matrix)
-    m = len(matrix[0])
-    
-    if n != m:
-        return None, f"Error: Matrix must be square. You entered {n}x{m}."
-    
-    if n > 5:
-        return None, "Error: Matrix dimension must be 5x5 or smaller."
-    
-    return np.array(matrix, dtype=float), None
+    return matrix_data
 
-def automated_matrix_diagonalizer(A):
-    """Diagonalize a matrix and return results."""
-    n = A.shape[0]
-    results = {}
-    results['original_matrix'] = np.array2string(A, precision=4, suppress_small=True)
-
-    # 1. Compute for Eigenvalues and Eigenvectors.
+def diagonalize_clicked(event=None):
     try:
-        eigenvalues, eigenvectors = np.linalg.eig(A)
-        # Cleans imaginary values from numpy calculations if they are negligible.
-        if np.allclose(eigenvalues.imag, 0):
-            eigenvalues = eigenvalues.real
-            eigenvectors = eigenvectors.real
-    except np.linalg.LinAlgError:
-        return None, "Error: LinAlgError. Matrix computation failed."
-
-    # 2. Matrix P.
-    P = eigenvectors
-
-    # 3. Check diagonalizability.
-    rank_P = np.linalg.matrix_rank(P)  # Checks if P is full rank.
-
-    if rank_P < n:
-        results['diagonalizable'] = False
-        results['reason'] = f"Rank of P is {rank_P} < {n}."
-        return results, None
-    else:
-        results['diagonalizable'] = True
-        
-        # 4. Matrix D.
-        D = np.diag(eigenvalues)
-
-        # 5. Display P and D, rounded for cleaner output.
-        D_display = np.round(D, decimals=4)
-        P_display = np.round(P, decimals=4)
-        
-        results['eigenvalues'] = np.array2string(np.round(eigenvalues, decimals=4), precision=4, suppress_small=True)
-        results['matrix_P'] = np.array2string(P_display, precision=4, suppress_small=True)
-        results['matrix_D'] = np.array2string(D_display, precision=4, suppress_small=True)
-
-        # 6. Verification
-        P_inv = np.linalg.inv(P)
-        check = P_inv @ A @ P
-        results['verified'] = np.allclose(check, D)
-        
-        return results, None
-
-def diagonalize_clicked():
-    """Handle diagonalize button click."""
-    try:
-        print("PyScript: diagonalize_clicked() called")
-        matrix_input = document.getElementById("matrixInput").value
         output_div = document.getElementById("output")
         
-        print(f"PyScript: Got matrix input: {matrix_input[:50]}...")
+        # Get matrix from table
+        matrix_data = get_matrix_from_table()
         
-        # Parse matrix input
-        matrix, error = parse_matrix_input(matrix_input)
-        
-        if error:
-            print(f"PyScript: Parse error: {error}")
-            output_div.innerHTML = f"<p style='color: red;'>{error}</p>"
+        # Validate matrix is not empty
+        if not matrix_data:
+            output_div.innerHTML = "<p style='color: red;'><strong>Error:</strong> Matrix is empty.</p>"
             return
         
-        print("PyScript: Matrix parsed successfully")
+        # Validate square matrix
+        rows = len(matrix_data)
+        cols = len(matrix_data[0]) if matrix_data else 0
         
-        # Diagonalize
-        results, error = automated_matrix_diagonalizer(matrix)
-        
-        if error:
-            print(f"PyScript: Diagonalization error: {error}")
-            output_div.innerHTML = f"<p style='color: red;'>{error}</p>"
+        if rows != cols:
+            output_div.innerHTML = f"<p style='color: red;'><strong>Error:</strong> Matrix must be square. Current size: {rows}x{cols}</p>"
             return
         
-        print("PyScript: Diagonalization successful")
+        # Create SymPy matrix
+        M = sp.Matrix(matrix_data)
         
-        # Format output
-        if not results['diagonalizable']:
-            output_html = f"<p><strong>Result: Matrix is NOT diagonalizable</strong></p><p><strong>Reason:</strong> {results['reason']}</p><p><strong>Original Matrix:</strong><pre>{results['original_matrix']}</pre></p>"
-        else:
-            verified_text = "✓ Diagonalization verified: P⁻¹AP = D" if results['verified'] else "Verification failed"
-            output_html = f"<p><strong>Result: Matrix IS diagonalizable ✓</strong></p><p><strong>Original Matrix A:</strong><pre>{results['original_matrix']}</pre></p><p><strong>Eigenvalues:</strong><pre>{results['eigenvalues']}</pre></p><p><strong>Matrix P (Eigenvectors):</strong><pre>{results['matrix_P']}</pre></p><p><strong>Matrix D (Diagonal):</strong><pre>{results['matrix_D']}</pre></p><p><strong>Verification:</strong> {verified_text}</p>"
+        # Check if matrix is numeric
+        if not all(elem.is_real or elem.is_complex for elem in M):
+            output_div.innerHTML = "<p style='color: red;'><strong>Error:</strong> All matrix elements must be numeric.</p>"
+            return
+
+        # Perform diagonalization
+        if not M.is_diagonalizable():
+            output_div.innerHTML = "<p style='color: #d32f2f;'><strong>Result:</strong> Matrix is NOT Diagonalizable</p><p><strong>Reason:</strong> Matrix is defective (geometric multiplicity &lt; algebraic multiplicity for some eigenvalue).</p>"
+            return
         
-        output_div.innerHTML = output_html
-        print("PyScript: Output updated successfully")
+        # Get P (eigenvectors) and D (diagonal matrix)
+        P, D = M.diagonalize()
+        
+        # Simplify to rational form
+        P = P.applyfunc(lambda x: sp.nsimplify(x, rational=True))
+        D = D.applyfunc(lambda x: sp.nsimplify(x, rational=True))
+        
+        # Format output with LaTeX
+        p_latex = sp.latex(P)
+        d_latex = sp.latex(D)
+        
+        # Get eigenvalues and eigenvectors
+        eigenvals_dict = M.eigenvects()
+        eigen_display = ""
+        
+        for eigenval, mult, eigenvects in eigenvals_dict:
+            # Simplify eigenvalue to rational form
+            eigenval_simplified = sp.nsimplify(eigenval, rational=True)
+            eigen_display += f"<p style='margin: 10px 0;'><strong>λ = $${sp.latex(eigenval_simplified)}$$</strong> (multiplicity: {mult})</p>"
+            for i, vec in enumerate(eigenvects):
+                # Simplify eigenvector to rational form
+                vec_simplified = vec.applyfunc(lambda x: sp.nsimplify(x, rational=True))
+                eigen_display += f"<p style='margin: 5px 0; padding-left: 20px;'>v<sub>{i+1}</sub> = $${sp.latex(vec_simplified.T)}$$</p>"
+
+        html_output = f"""
+            <div style='background-color: #e8f5e9; border-left: 4px solid #4CAF50; padding: 15px; border-radius: 4px; margin: 10px 0;'>
+                <p style='color: #2e7d32; font-weight: bold; margin: 0 0 10px 0;'>✓ Matrix IS Diagonalizable</p>
+            </div>
+            
+            <h4 style='color: #333; margin-top: 20px; border-bottom: 2px solid #4CAF50; padding-bottom: 8px;'>Eigenvector Matrix P:</h4>
+            <p>$$P = {p_latex}$$</p>
+            
+            <h4 style='color: #333; margin-top: 20px; border-bottom: 2px solid #4CAF50; padding-bottom: 8px;'>Diagonal Matrix D:</h4>
+            <p>$$D = {d_latex}$$</p>
+            
+            <h4 style='color: #333; margin-top: 20px; border-bottom: 2px solid #4CAF50; padding-bottom: 8px;'>Eigenvalues and Eigenvectors:</h4>
+            {eigen_display}
+            
+            <div style='background-color: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; border-radius: 4px; margin: 20px 0;'>
+                <p style='margin: 0; font-size: 0.95em;'><strong>Verification:</strong> A = P·D·P<sup>-1</sup></p>
+            </div>
+        """
+        
+        output_div.innerHTML = html_output
+        
+        # Trigger MathJax rendering
+        if window.MathJax:
+            window.MathJax.typesetPromise([output_div])
+
+    except ValueError as val_error:
+        document.getElementById("output").innerHTML = f"<p style='color: red;'><strong>Input Error:</strong> {str(val_error)}</p>"
     except Exception as e:
-        print(f"PyScript: Exception occurred: {str(e)}")
-        output_div = document.getElementById("output")
-        output_div.innerHTML = f"<p style='color: red;'>Error: {str(e)}</p>"
+        document.getElementById("output").innerHTML = f"<p style='color: red;'><strong>Error:</strong> {str(e)}</p>"
 
-# Make the function available to JavaScript
+# Expose function to JavaScript
 window.diagonalize_clicked = diagonalize_clicked
-print("PyScript: diagonalize_clicked function exposed to window")
     </script>
-
     <script src="scripts/app.js"></script>
 
-</body>
+    </body>
 </html>
