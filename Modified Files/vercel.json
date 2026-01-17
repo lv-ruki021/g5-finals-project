@@ -1,34 +1,16 @@
 {
-    "builds": [
+    "rewrites": [
         {
-            "src": "app.py",
-            "use": "@vercel/python"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/",
-            "dest": "/home.html"
+            "source": "/",
+            "destination": "/home.html"
         },
         {
-            "src": "/aboutus",
-            "dest": "/aboutus.html"
+            "source": "/aboutus",
+            "destination": "/aboutus.html"
         },
         {
-            "src": "/diagonalize",
-            "dest": "/diagonalize.html"
-        },
-        {
-            "src": "/scripts/(.*)",
-            "dest": "/scripts/$1"
-        },
-        {
-            "src": "/style/(.*)",
-            "dest": "/style/$1"
-        },
-        {
-            "src": "/api/(.*)",
-            "dest": "app.py"
+            "source": "/diagonalize",
+            "destination": "/diagonalize.html"
         }
     ]
 }
