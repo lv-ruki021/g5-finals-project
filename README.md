@@ -21,10 +21,10 @@ This technique is essential for:
 * Computing matrix powers
 * Understanding the behavior of linear systems
 
----
-
 <details>
-<summary>AUTODIAG SITE</summary>
+<summary>Click to expand</summary>
+
+# AUTODIAG SITE OVERVIEW
 
 ### Home Page
 ![Matrix Diagonalization Home Page](assets/landingPage.gif)
