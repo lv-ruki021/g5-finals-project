@@ -131,8 +131,8 @@ function tableToMatrix() {
 
 // Send converted matrix into Python
 function sendMatrixToPython(matrix) {
-    //Send to this IP
-    fetch("http://127.0.0.1:5000/matrix", { // URL used from Flash Backend
+    //Send to API endpoint
+    fetch("/api/matrix", { // URL used from Flask Backend
         method: "POST", // Method used -> POST (Sends data to the server)
         headers: { "Content-Type": "application/json" }, // Content Type (Tells server it's JSON)
         body: JSON.stringify({ matrix: matrix }) // Converts the matrix from here into a JSON File.
