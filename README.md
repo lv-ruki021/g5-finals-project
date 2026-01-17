@@ -28,9 +28,39 @@ This technique is essential for:
 
 ### Home Page
 ![Matrix Diagonalization Home Page](assets/landingPage.gif)
+> Shows the overview and what to expect on the site.
 
 ### Diagonalization Page
 ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+> The main page responsible for all the diagonalization.
+
+<details>
+ <summary>Matrix Size Selection</summary>
+ 
+ ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+</details>
+
+<details>
+ <summary>Inputting Values</summary>
+ 
+ ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+</details>
+
+<details>
+ <summary>Show Results</summary>
+ 
+ ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+</details>
+
+<details>
+ <summary>Error Handler</summary>
+ 
+ ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+</details>
+
+### Aout Us Page
+![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+
 
 </details>
 
