@@ -9,6 +9,10 @@
             "dest": "/style/$1"
         },
         {
+            "src": "/api/matrix",
+            "dest": "/api/matrix.py"
+        },
+        {
             "src": "/diagonalize",
             "dest": "/diagonalize.html"
         },
