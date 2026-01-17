@@ -7,7 +7,8 @@ It provides the theoretical foundation for understanding matrix operations and t
 ---
 
 # **TASK: AUTOMATED MATRIX DIAGONALIZER**
-![Matrix Diagonalization Demo](g5-finals-project/assets/landingPage.gif) 
+![Matrix Diagonalization Demo](g5-finals-project/assets/landingPage.gif)
+
 The goal of this project is to build an application that:
 * Accepts an **n × n matrix A** (where n ≤ 5)
 * Checks whether the matrix is **diagonalizable**
