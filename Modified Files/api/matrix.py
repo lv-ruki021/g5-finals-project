@@ -6,8 +6,9 @@ import sympy as sp
 
 app = Flask(__name__)
 
-@app.route("/", methods=["POST"])
-def diagonalize():
+@app.route("/", methods=["POST", "GET"])
+@app.route("/<path:path>", methods=["POST", "GET"])
+def diagonalize(path=""):
     try:
         # Get input
         data = request.get_json() # Initializing the method above, allows for easier request
