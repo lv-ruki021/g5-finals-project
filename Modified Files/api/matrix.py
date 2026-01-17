@@ -7,8 +7,6 @@ import sympy as sp
 app = Flask(__name__)
 
 @app.route("/", methods=["POST"])
-@app.route("/api/matrix", methods=["POST"]) 
-@app.route("/matrix", methods=["POST"])
 def diagonalize():
     try:
         # Get input
@@ -70,3 +68,5 @@ def diagonalize():
             "message": str(e)
         }), 500
 
+# Export for Vercel serverless function
+application = app
