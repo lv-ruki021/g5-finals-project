@@ -1,34 +1,34 @@
 {
     "builds": [
         {
-            "src": "app.py",
+            "src": "Modified Files/app.py",
             "use": "@vercel/python"
         }
     ],
     "routes": [
         {
             "src": "/",
-            "dest": "/home.html"
+            "dest": "/Modified Files/home.html"
         },
         {
             "src": "/aboutus",
-            "dest": "/aboutus.html"
+            "dest": "/Modified Files/aboutus.html"
         },
         {
             "src": "/diagonalize",
-            "dest": "/diagonalize.html"
+            "dest": "/Modified Files/diagonalize.html"
         },
         {
             "src": "/scripts/(.*)",
-            "dest": "/scripts/$1"
+            "dest": "/Modified Files/scripts/$1"
         },
         {
             "src": "/style/(.*)",
-            "dest": "/style/$1"
+            "dest": "/Modified Files/style/$1"
         },
         {
             "src": "/api/(.*)",
-            "dest": "app.py"
+            "dest": "Modified Files/app.py"
         }
     ]
 }
