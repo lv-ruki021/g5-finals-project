@@ -7,9 +7,7 @@ It provides the theoretical foundation for understanding matrix operations and t
 ---
 
 # **TASK: AUTOMATED MATRIX DIAGONALIZER**
-
 The goal of this project is to build an application that:
-
 * Accepts an **n × n matrix A** (where n ≤ 5)
 * Checks whether the matrix is **diagonalizable**
 * If diagonalizable, generates:
@@ -19,12 +17,13 @@ The goal of this project is to build an application that:
 
 **Matrix diagonalization** transforms a matrix into diagonal form, simplifying complex computations.
 This technique is essential for:
-
 * Solving differential equations
 * Computing matrix powers
 * Understanding the behavior of linear systems
 
 ---
+![Matrix Diagonalization Demo](g5-finals-project\assets\landingPage.gif)
+
 
 # **TOOLS USED**
 ![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge\&logo=python\&logoColor=ffdd54)
