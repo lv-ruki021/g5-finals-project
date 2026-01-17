@@ -139,7 +139,21 @@ function sendMatrixToPython(matrix) {
     })
     // Get Response -> converts to JSON again
     .then(response => {
-        return response.json()
+        if (!response.ok) {
+            return response.text().then(text => {
+                throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+            });
+        }
+        
+        // Check if response has content
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            return response.text().then(text => {
+                throw new Error(`Expected JSON but got: ${contentType}. Response: ${text.substring(0, 200)}`);
+            });
+        }
+        
+        return response.json();
     })
     // Send Data (Converted JSON) to displayDiagonalization
     .then(data => {
@@ -147,7 +161,9 @@ function sendMatrixToPython(matrix) {
     })
     // Catch Error
     .catch(error => {
-        console.error(error)
+        console.error("Error:", error);
+        document.getElementById("output").innerHTML = 
+            `<p style='color:red;text-align:center'><strong>Error: ${error.message}</strong></p>`;
     });
 }
 
