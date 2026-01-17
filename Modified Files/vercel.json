@@ -1,28 +1,16 @@
 {
-    "routes": [
+    "rewrites": [
         {
-            "src": "/scripts/(.*)",
-            "dest": "/scripts/$1"
+            "source": "/",
+            "destination": "/home.html"
         },
         {
-            "src": "/style/(.*)",
-            "dest": "/style/$1"
+            "source": "/aboutus",
+            "destination": "/aboutus.html"
         },
         {
-            "src": "/api/matrix",
-            "dest": "/api/matrix.py"
-        },
-        {
-            "src": "/diagonalize",
-            "dest": "/diagonalize.html"
-        },
-        {
-            "src": "/aboutus",
-            "dest": "/aboutus.html"
-        },
-        {
-            "src": "/",
-            "dest": "/home.html"
+            "source": "/diagonalize",
+            "destination": "/diagonalize.html"
         }
     ]
 }
