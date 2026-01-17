@@ -1,0 +1,597 @@
+/* CSS File */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Rubik", "sans-serif";
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    padding: 1rem;
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    color: #21212e;
+}
+h2 {
+    color: #21212e;
+}
+
+h3 {
+    color: #21212e;
+}
+
+/* background color for top navigation bar */ 
+.topnav {
+  background-color: #ffbd59;
+  overflow: hidden;
+  border: 3px solid #21212e;
+  animation: slideDown 0.5s ease-out;
+}
+
+/* decoration for top navigation bar */
+.topnav a {
+  float: left;
+  color: #21212e;
+  text-align: center;
+  text-decoration: none;
+  padding: 14px 16px;
+  border-left: 1px solid #21212e;
+  border-right: 1px solid #21212e;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ffde59;
+  color: #21212e;
+  transform: scale(1.05);
+}
+
+/* Color for active link */
+.topnav a.active {
+  background-color: #fff6cf;
+  color: #21212e;
+}
+
+/* title card styles */
+div.title-card {
+    background: #fff6cf; 
+    width: 100%; 
+    max-width: 700px;
+    padding: 20px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    top: 1.5rem;
+    animation: scaleIn 0.6s ease-out;
+}
+
+/* subtitle styles */
+.subtitle.card{
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding-left: 5rem;
+    padding-top: 15rem;
+}
+
+/* get started button styles */
+button.get-started-button{
+    background-color: #ffde59;
+    color: #21212e;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* get started button hover effect */
+button.get-started-button:hover {
+    background-color: #ffd633;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+button:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+}
+
+
+/* Cards container styles */
+.cards-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+    justify-content: center;
+}
+
+/* Individual info card styles */
+.info-card {
+    flex: 1;
+    max-width: 500px;
+    background: #ffde59;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid #ffbd59;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideUp 0.6s ease-out both;
+}
+
+/* Stagger animation for info cards */
+.info-card:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.info-card:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+/* Info card hover effect */
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Info card heading styles */
+.info-card h2 {
+    color: #21212e;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    text-align: center;
+    animation: slideDown 0.4s ease-out;
+}
+
+/* Info card paragraph styles */
+.info-card p {
+    color: #333;
+    line-height: 1.8;
+    font-size: 0.95rem;
+    text-align: justify;
+    animation: fadeIn 0.5s ease-out 0.2s both;
+}
+
+/*default button styles*/
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: #ffbd59;
+    color: #21212e;
+    border: 2px solid #e0a640;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 500;
+}
+
+#diagonalizeDiv {
+    text-align: center;
+    align-content: center;
+}
+#diagonalizeBtn {
+    text-align: center;
+    align-content: center;
+}
+
+/* default button hover effect */
+button:hover:not(:disabled) {
+    background-color: #dea44c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* button active/click effect */
+button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* button disabled state */
+button:disabled {
+    background-color: #d0d0d0;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+
+/* Desigining Diagonalization Page */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    background: #ffbd59;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    top: 2rem;
+    animation: slideUp 0.6s ease-out;
+}
+
+/* For Diagonalize Tab */
+/* Container styles */
+.container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    animation: slideDown 0.5s ease-out 0.2s both;
+}
+
+/* content wrapper styles */
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    min-height: 500px;
+}
+
+
+/* input and output section styles */
+.input-section {
+    flex: 1;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffde59 0%, #ffeaa7 100%);
+    border-radius: 8px;
+    border: 2px solid #e0a640;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    animation: slideLeft 0.6s ease-out 0.3s both;
+}
+
+.input-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #21212e  ;
+    font-size: 1.3rem;
+    text-align: center;
+    border-bottom: 3px solid #333;
+    padding-bottom: 10px;
+}
+
+.input-section p {
+    margin-bottom: 10px;
+    color: #21212e;
+    font-size: 0.95rem;
+}
+
+/* Removed those visible arrows on input boxes*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    appearance:  textfield;
+    -moz-appearance: textfield;
+}
+
+/* ===== MATRIX TABLE STYLES ===== */
+.matrix-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.matrix-controls label {
+    font-weight: bold;
+    color: #333;
+}
+
+.matrix-controls select {
+    padding: 8px 12px;
+    background-color: white;
+    color: #333;
+    border: 2px solid #4CAF50;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.matrix-controls select:hover {
+    border-color: #45a049;
+}
+
+.matrix-controls select:focus {
+    outline: none;
+    border-color: #45a049;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+#matrixTableContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.matrix-table {
+    border-collapse: separate;
+    border-spacing: 4px;
+    border: 3px solid #333;
+    border-radius: 8px;
+    padding: 8px;
+    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.matrix-table tr {
+    transition: background-color 0.2s ease;
+}
+
+.matrix-table td {
+    padding: 4px;
+    background-color: transparent;
+}
+
+.matrix-table input,
+.matrix-input {
+    width: 70px;
+    height: 40px;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Rubik", "sans-serif";
+    background: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.matrix-table input:hover,
+.matrix-input:hover {
+    border-color: #45a049;
+    transform: scale(1.05);
+    box-shadow: 0 3px 8px rgba(76, 175, 80, 0.2);
+    z-index: 1;
+}
+
+.matrix-table input:focus,
+.matrix-input:focus {
+    outline: none;
+    border-color: #45a049;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2), 0 4px 12px rgba(76, 175, 80, 0.3);
+    background-color: #f0f8f0;
+    transform: scale(1.08);
+    z-index: 2;
+}
+
+.matrix-table input:invalid,
+.matrix-input:invalid {
+    border-color: #f44336;
+}
+
+.matrix-table input[style*="border-color: red"],
+.matrix-input[style*="border-color: red"] {
+    border-color: #f44336 !important;
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.2);
+    animation: shake 0.3s ease;
+}
+
+.matrix-table input::placeholder,
+.matrix-input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.output-section {
+    flex: 1;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffde59 0%, #ffeaa7 100%);
+    border-radius: 8px;
+    border: 2px solid #e0a640;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
+    animation: slideRight 0.6s ease-out 0.3s both;
+}
+
+.output-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #21212e;
+    font-size: 1.3rem;
+    text-align: center;
+    border-bottom: 3px solid #333;
+    padding-bottom: 10px;
+}
+
+/* result box styles */
+.result-box { 
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 25px; 
+    border: 2px solid #4CAF50;
+    border-radius: 10px; 
+    font-family: "Rubik", "sans-serif";
+    font-size: 1rem;
+    line-height: 1.8;
+    min-height: 150px;
+    overflow-y: auto;
+    animation: fadeIn 0.5s ease-out;
+    box-shadow: 0 4px 6px rgba(76, 175, 80, 0.1);
+}
+
+.result-box p {
+    margin: 15px 0;
+    padding: 8px 0;
+    color: #333;
+}
+
+.result-box p strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.result-box h4 {
+    margin: 20px 0 10px 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.result-box sub {
+    font-size: 0.8em;
+}
+
+.result-box sup {
+    font-size: 0.8em;
+}
+
+.mjx-chtml {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* MathJax display styling */
+.mjx-math {
+    font-size: 1.1em;
+    padding: 5px 0;
+}
+
+/* Inline math */
+.mjx-chtml.MathJax_CHTML {
+    display: inline;
+}
+
+/*about us page team member styles*/
+
+.about-content{
+    padding-top: 0px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+li.team{
+    list-style-type: none;
+    margin-bottom: 4px;
+    animation: slideRight 0.5s ease-out both;
+}
+
+/* Stagger animation for team members */
+li.team:nth-child(1) { animation-delay: 0.1s; }
+li.team:nth-child(2) { animation-delay: 0.2s; }
+li.team:nth-child(3) { animation-delay: 0.3s; }
+li.team:nth-child(4) { animation-delay: 0.4s; }
+li.team:nth-child(5) { animation-delay: 0.5s; }
+
+/* anchor tag styles for team members */
+li.team a{
+    color: #333;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Team member link hover effect */
+li.team a:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+
+
+/* ===== ANIMATION KEYFRAMES ===== */
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide left animation */
+@keyframes slideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide right animation */
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale animation */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Shake animation for invalid inputs */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
