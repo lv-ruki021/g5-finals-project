@@ -1,15 +1,13 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 import sympy as sp
 
 # Vercel Serverless Function for Matrix Diagonalization
 # This file is automatically served at /api/matrix
 
 app = Flask(__name__)
-CORS(app)  # allow frontend JS fetch
 
-@app.route("/", methods=["POST"]) # Root route for this serverless function
-def diagonalize_clicked():
+@app.route("/", methods=["POST"])
+def diagonalize():
     try:
         # Get input
         data = request.get_json() # Initializing the method above, allows for easier request
