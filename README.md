@@ -1,12 +1,12 @@
 
-# **LINEAR ALGEBRA FINAL PROJECT**
+# **📂 LINEAR ALGEBRA FINAL PROJECT**
 
 **Linear Algebra** is a fundamental branch of mathematics that deals with vectors, matrices, and linear transformations.
 It provides the theoretical foundation for understanding matrix operations and their applications across science, engineering, and computer science.
 
 ---
 
-# **TASK: AUTOMATED MATRIX DIAGONALIZER**
+# **🤖 TASK: AUTOMATED MATRIX DIAGONALIZER**
 The goal of this project is to build an application that:
 * Accepts an **n × n matrix A** (where n ≤ 5)
 * Checks whether the matrix is **diagonalizable**
@@ -21,13 +21,13 @@ This technique is essential for:
 * Computing matrix powers
 * Understanding the behavior of linear systems
 
-# AUTODIAG HOME PAGE
+# 🧑‍💻 AUTODIAG HOME PAGE
 ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
 
 
 ---
 
-# **TOOLS USED**
+# **💻 TOOLS USED**
 ![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge\&logo=python\&logoColor=ffdd54)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge\&logo=html5\&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge\&logo=css3\&logoColor=white)
@@ -35,7 +35,7 @@ This technique is essential for:
 
 ---
 
-# **TEAM ROLES**
+# **💼 TEAM ROLES**
 
 | Member                                              | Role                     |
 | --------------------------------------------------- | ------------------------ |
