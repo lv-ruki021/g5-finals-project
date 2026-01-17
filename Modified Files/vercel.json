@@ -9,10 +9,6 @@
             "dest": "/style/$1"
         },
         {
-            "src": "/api/(.*)",
-            "dest": "/app.py"
-        },
-        {
             "src": "/diagonalize",
             "dest": "/diagonalize.html"
         },
@@ -26,4 +22,3 @@
         }
     ]
 }
-
