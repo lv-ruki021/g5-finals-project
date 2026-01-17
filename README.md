@@ -7,9 +7,7 @@ It provides the theoretical foundation for understanding matrix operations and t
 ---
 
 # **TASK: AUTOMATED MATRIX DIAGONALIZER**
-
 The goal of this project is to build an application that:
-
 * Accepts an **n × n matrix A** (where n ≤ 5)
 * Checks whether the matrix is **diagonalizable**
 * If diagonalizable, generates:
@@ -19,10 +17,53 @@ The goal of this project is to build an application that:
 
 **Matrix diagonalization** transforms a matrix into diagonal form, simplifying complex computations.
 This technique is essential for:
-
 * Solving differential equations
 * Computing matrix powers
 * Understanding the behavior of linear systems
+
+<details>
+<summary>Click to expand</summary>
+
+# AUTODIAG SITE OVERVIEW
+
+### Home Page
+![Matrix Diagonalization Home Page](assets/landingPage.gif)
+> Shows the overview and what to expect on the site.
+
+### Diagonalization Page
+![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+> The main page responsible for all the diagonalization.
+
+<details>
+ <summary>Matrix Size Selection</summary>
+ 
+ ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+</details>
+
+<details>
+ <summary>Inputting Values</summary>
+ 
+ ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+</details>
+
+<details>
+ <summary>Show Results</summary>
+ 
+ ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+</details>
+
+<details>
+ <summary>Error Handler</summary>
+ 
+ ![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+</details>
+
+### Aout Us Page
+![Matrix Diagonalization Diagonal Page](assets/landingPage.gif)
+
+
+</details>
+
 
 ---
 

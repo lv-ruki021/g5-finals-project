@@ -1,7 +1,7 @@
 // Matrix Diagonalization Application JavaScript
 
 /*
-Changes:
+Changes
 1. Removed Pyscript functionalities stuff, (waitForPyScript(), initializedApp())
 2. Removed setupDiagonalizeButton() as HTML has an available onclick method.
 3. Removed  (no more Pyscript)
